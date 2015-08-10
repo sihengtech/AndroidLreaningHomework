@@ -16,7 +16,7 @@ public class LrcParsImpl implements com.meibaorui.lrcparser.api.LrcParser {
     private final String authorAttr = "by";
     private final String albumNameAttr = "al";
     private final String singNameAttr = "ti";
-    private final String timeReg = "\\[(\\d{2}:\\d{2}\\.\\d{0,2})\\]";
+    private final String timeReg = "\\[(\\d{2}:\\d{2}\\.?\\d{0,2})\\]";
 
     private List<String> lrcLines;
 
