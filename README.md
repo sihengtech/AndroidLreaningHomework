@@ -1,6 +1,6 @@
 # AndroidLreaningHomework
 Android学习作业  
-开发环境：idea jdk 1.8
+开发环境：idea jdk 1.8 androidstudio
 
 第一章 java语法基础  
 1、[在控制台打印出Hello Java](https://github.com/meibaorui/AndroidLreaningHomework/tree/master/AndroidLreaningHomework/javabasic/HelloJava )  
