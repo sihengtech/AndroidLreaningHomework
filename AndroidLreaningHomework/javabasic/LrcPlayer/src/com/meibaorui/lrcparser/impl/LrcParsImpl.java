@@ -96,8 +96,8 @@ public class LrcParsImpl implements com.meibaorui.lrcparser.api.LrcParser {
                 int groupCount = matcher.groupCount();
                 for (int i = 0; i <= groupCount; i++) {
                     String timeStr = matcher.group(i);
-                    Integer seconds = timeStr2timeInt(timeStr);
-                    timeWordsMap.put(seconds, words);
+                    Integer mSec = timeStr2timeInt(timeStr);
+                    timeWordsMap.put(mSec, words);
                 }
             }
         }
@@ -114,20 +114,21 @@ public class LrcParsImpl implements com.meibaorui.lrcparser.api.LrcParser {
     }
 
     private Integer timeStr2timeInt(String timeStr) {
-        int seconds = 0;
+        int mSec = 0;
         timeStr = timeStr.replace("[", "").replace(".", ":").replace("]", "");
         String[] afterSpiltTimeStrArr = timeStr.split(":");
         for (int i = 0; i < afterSpiltTimeStrArr.length; i++) {
             if (i == 0) {
-                seconds += Integer.parseInt(afterSpiltTimeStrArr[i]) * 60;
+                mSec += Integer.parseInt(afterSpiltTimeStrArr[i]) * 60*1000;
             }
             if (i == 1) {
-                seconds += Integer.parseInt(afterSpiltTimeStrArr[i]);
+                mSec += Integer.parseInt(afterSpiltTimeStrArr[i])*1000;
             }
             if (i == 2) {
+                mSec += Integer.parseInt(afterSpiltTimeStrArr[i]);
                 break;
             }
         }
-        return seconds;
+        return mSec;
     }
 }

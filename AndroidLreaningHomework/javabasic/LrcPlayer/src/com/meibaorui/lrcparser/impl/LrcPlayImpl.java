@@ -2,6 +2,8 @@ package com.meibaorui.lrcparser.impl;
 
 import com.meibaorui.lrcparser.bean.LrcInfo;
 
+import java.util.Arrays;
+
 /**
  * Created by meibaorui on 2015/8/7.
  */
@@ -17,18 +19,21 @@ public class LrcPlayImpl implements com.meibaorui.lrcparser.api.LrcPlayer {
      */
     public void play() {
         printBasicInfo();
-        int seconds = 0;
-        while (!lrcInfo.getTimeWordsMap().isEmpty()) {
-            if (lrcInfo.getTimeWordsMap().containsKey(seconds)) {
-                System.out.print(String.format("\r %s", lrcInfo.getTimeWordsMap().get(seconds)));
-            }
+
+        Object[] timeWordsMapKeyArr = lrcInfo.getTimeWordsMap().keySet().toArray();
+        Arrays.sort(timeWordsMapKeyArr);
+
+        for(int i=0;i<timeWordsMapKeyArr.length;i++){
+            int lastMSec=(i==0?0:(Integer)timeWordsMapKeyArr[i-1]);
+            int nowMSec=(Integer)timeWordsMapKeyArr[i];
+            int diffMSec=nowMSec-lastMSec;
             try {
-                Thread.sleep(1000);
+                Thread.sleep(diffMSec);
             } catch (InterruptedException ex) {
                 //TODO：记录错误日志
                 System.out.println("播放歌词出错。");
             }
-            seconds++;
+            System.out.print(String.format("\r %s", lrcInfo.getTimeWordsMap().get(timeWordsMapKeyArr[i])));
         }
     }
 
